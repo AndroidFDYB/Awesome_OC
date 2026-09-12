@@ -21,7 +21,7 @@
     
     view.title = @"Shark";
     view.iconRes = @"star.fill";
-    view.desc =  @"这是一个带阴影、图标和点击动画的自定义卡片控件。";
+    view.desc =  @"这是一个带阴影、图标和点击动画的自定义卡片控件。这是一个带阴影、图标和点击动画的自定义卡片控件。";
     view.clickHandler = ^( SkUiView * view) {
         NSLog(@"Card clicked !!!");
         NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];

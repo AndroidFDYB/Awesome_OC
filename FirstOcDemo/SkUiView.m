@@ -58,6 +58,7 @@
     _descLabel = [[UILabel alloc] init];
     _descLabel.font = [UIFont systemFontOfSize:13];
     _descLabel.textColor = [UIColor darkGrayColor];
+    _descLabel.numberOfLines = 0;
     [self addSubview:_descLabel];
     
     
@@ -75,8 +76,16 @@
     CGFloat iconSize = 40;
     
     _tileLabel.frame = CGRectMake(padding * 2 + iconSize, padding, self.bounds.size.width - padding * 2  - iconSize, iconSize);
-    _descLabel.frame =  CGRectMake(padding, padding * 2 + iconSize, self.bounds.size.width - padding * 2, self.bounds.size.height - iconSize - padding * 2);
+    
+    CGFloat widthMax = self.bounds.size.width - padding*2;
+    // using
+    CGRect rect = [_descLabel.text boundingRectWithSize:CGSizeMake(widthMax, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: _descLabel.font} context:nil];
+    NSLog(@"lenght : %f",rect.size.height);
+    _descLabel.frame =  CGRectMake(padding,iconSize + padding*2 ,widthMax, ceil(rect.size.height));
     _iconView.frame = CGRectMake(padding, padding, iconSize, iconSize);
+    
+    CGFloat totalHeight = padding * 3 + iconSize + ceil(rect.size.height);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,self.frame.size.width, totalHeight);
 }
 
 
@@ -87,6 +96,7 @@
     NSString* iTitle = [title copy];
     _title = iTitle;
     _tileLabel.text = iTitle;
+    [self layoutSubviews];
 }
 
 
