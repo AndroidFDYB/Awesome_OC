@@ -96,7 +96,7 @@
     NSString* iTitle = [title copy];
     _title = iTitle;
     _tileLabel.text = iTitle;
-    [self layoutSubviews];
+    [self setNeedsLayout];
 }
 
 

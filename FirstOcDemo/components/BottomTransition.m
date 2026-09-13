@@ -27,7 +27,7 @@
     return  0.3;
 }
 
-
+// sharknode :  animation 也是一个view容器，承载着目标控件到指定位置。
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toVC   = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
