@@ -17,7 +17,11 @@ import SwiftUI
     }
 
     
-    @MainActor @objc static func makeViewControllerV2(viewModel: DemoViewModel) -> UIViewController{
-        UIHostingController(rootView: DemoView(viewModel:viewModel));
+//    @MainActor @objc static func makeViewControllerV2(viewModel: DemoViewModel) -> UIViewController{
+//        UIHostingController(rootView: DemoView(viewModel:viewModel));
+//    }
+    
+    @MainActor @objc static func makeViewControllerV3(onSumbmit: @escaping (String)->Void) -> UIViewController {
+        UIHostingController(rootView: DemoView(onSubmit:onSumbmit))
     }
 }

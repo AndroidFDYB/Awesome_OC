@@ -61,9 +61,24 @@
 -(void) butonTappedForSwift {
     self.viewModel = [[DemoViewModel alloc]init];
     self.viewModel.delegate = self;
-//    UIViewController *vc = [SwiftUIBridge makeViewController];
-    UIViewController *vc = [SwiftUIBridge makeViewControllerV2WithViewModel:self.viewModel];
+    //    UIViewController *vc = [SwiftUIBridge makeViewController];
+    
+    //    UIViewController *vc = [SwiftUIBridge makeViewControllerV2WithViewModel:self.viewModel];
+    
+    __weak typeof(self) weakSelf = self;
+    UIViewController *vc = [SwiftUIBridge makeViewControllerV3OnSumbmit:^(NSString* text){
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        
+        if(!strongSelf) {
+            return;
+        }
+        
+        NSLog(@"content : %@",text);
+    }];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
 }
 
 -(void) butonTapped {

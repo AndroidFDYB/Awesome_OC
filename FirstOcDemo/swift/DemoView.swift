@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct DemoView: View {
-    @ObservedObject var viewModel: DemoViewModel
+    
+    let onSubmit: (String)->Void
+    
+    @State private var text:String = ""
     
     var body: some View {
         VStack(spacing: 12) {
-            TextField("please input", text: $viewModel.text)
+            TextField("please input", text:$text)
                 .textFieldStyle(.roundedBorder)
             Button("submit") {
-                viewModel.submit()
+                onSubmit(text)
             }
         }.padding()
     }
