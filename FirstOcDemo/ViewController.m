@@ -27,7 +27,7 @@
     
     
     // initRootViewCotroller
-    ViewController *vc = [[ViewController alloc] init];
+//    ViewController *vc = [[ViewController alloc] init];
     
     
     SkUiView * view = [[SkUiView alloc] initWithFrame:CGRectMake(20, 40, self.view.bounds.size.width - 40, 120)];
