@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SkCustomControllerViewController : UIViewController
 
+
+-(void) printLogFromSw:(NSString*) content;
+ 
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,8 +9,12 @@
 #import "SkUiView.h"
 #import "SkCustomControllerViewController.h"
 #import "components/BottomTransition.h"
+#import "FirstOcDemo-Swift.h"
 
-@interface ViewController ()<UINavigationControllerDelegate>
+
+@interface ViewController ()<UINavigationControllerDelegate,DemoViewModelDelegate>
+
+@property (nonatomic, strong) DemoViewModel *viewModel;
 
 @end
 
@@ -20,7 +24,7 @@
     [super viewDidLoad];
     
     self.navigationController.delegate = self;
-
+    
     
     // initRootViewCotroller
     ViewController *vc = [[ViewController alloc] init];
@@ -46,8 +50,21 @@
     [button addTarget:self action:@selector(butonTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
+    
+    button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:@"自定义SwiftUI" forState:UIControlStateNormal];
+    button.frame = CGRectMake(100, view.bounds.size.height + 40 + 40 + 100, 100, 50);
+    [button addTarget:self action:@selector(butonTappedForSwift) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
 }
-
+-(void) butonTappedForSwift {
+    self.viewModel = [[DemoViewModel alloc]init];
+    self.viewModel.delegate = self;
+//    UIViewController *vc = [SwiftUIBridge makeViewController];
+    UIViewController *vc = [SwiftUIBridge makeViewControllerV2WithViewModel:self.viewModel];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void) butonTapped {
     NSLog(@"按钮被电击啦啦啦啦");
@@ -72,5 +89,10 @@
 #pragma mark - UINavigationControllerDelegate
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     return [[BottomTransition alloc] initWithOperation:operation];
+}
+
+#pragma dmoe
+- (void)viewModel:(DemoViewModel *)vm didSubmitText:(NSString *)text {
+    NSLog(@"Content From %@",text);
 }
 @end

@@ -142,4 +142,7 @@
 }
 
 
+- (void)printLogFromSw:(NSString *)content {
+    NSLog(@"Log from SW : %@",content);
+}
 @end
