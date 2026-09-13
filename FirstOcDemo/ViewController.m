@@ -8,8 +8,9 @@
 #import "ViewController.h"
 #import "SkUiView.h"
 #import "SkCustomControllerViewController.h"
+#import "components/BottomTransition.h"
 
-@interface ViewController ()
+@interface ViewController ()<UINavigationControllerDelegate>
 
 @end
 
@@ -18,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.delegate = self;
+
     
     // initRootViewCotroller
     ViewController *vc = [[ViewController alloc] init];
@@ -53,10 +56,21 @@
 //    vc.modalPresentationStyle = UIModalPresentationFullScreen;
 //    [self presentViewController:vc animated:YES completion:nil];
     
-    NSLog(@"nav = %@", self.navigationController);
+  
 
     
+    // Transition
+//    CATransition *transition = [CATransition animation];
+//    transition.duration = 0.3;
+//    transition.type = kCATransitionMoveIn;
+//    transition.subtype = kCATransitionFromTop;
+//    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+//    
     [self.navigationController pushViewController:vc animated:YES];
 };
 
+#pragma mark - UINavigationControllerDelegate
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    return [[BottomTransition alloc] initWithOperation:operation];
+}
 @end
