@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "SkUiView.h"
+#import "SkCustomControllerViewController.h"
 
 @interface ViewController ()
 
@@ -16,6 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    // initRootViewCotroller
+    ViewController *vc = [[ViewController alloc] init];
+    
     
     SkUiView * view = [[SkUiView alloc] initWithFrame:CGRectMake(20, 40, self.view.bounds.size.width - 40, 120)];
     
@@ -29,7 +35,28 @@
     };
     
     [self.view addSubview:view];
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:@"自定义UI" forState:UIControlStateNormal];
+    button.frame = CGRectMake(100, view.bounds.size.height + 40 + 40, 100, 50);
+    [button addTarget:self action:@selector(butonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
 }
 
+
+-(void) butonTapped {
+    NSLog(@"按钮被电击啦啦啦啦");
+    
+    SkCustomControllerViewController *vc = [[SkCustomControllerViewController alloc]init];
+//    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+//    [self presentViewController:vc animated:YES completion:nil];
+    
+    NSLog(@"nav = %@", self.navigationController);
+
+    
+    [self.navigationController pushViewController:vc animated:YES];
+};
 
 @end
